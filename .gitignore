@@ -1,0 +1,29 @@
+# Environment & Credentials
+.env
+.env.*
+!.env.example
+*.env
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+
+# Playwright Test Artifacts & Reports
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+screenshots/
+videos/
+*.webm
+*.mp4
+
+# Internal git backup
+.git_backup/
+.git_gitlab/
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db

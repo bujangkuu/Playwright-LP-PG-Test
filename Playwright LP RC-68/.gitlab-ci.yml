@@ -1,0 +1,29 @@
+﻿stages:
+  - test
+  - deploy
+
+test_automation:
+  image: mcr.microsoft.com/playwright:v1.48.0-jammy
+  stage: test
+  script:
+    - npm ci
+    - npx playwright install chromium --with-deps
+    - npx playwright test
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    expire_in: 7 days
+
+pages:
+  stage: deploy
+  dependencies:
+    - test_automation
+  script:
+    - rm -rf public
+    - mv playwright-report public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
